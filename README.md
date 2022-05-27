@@ -40,54 +40,55 @@ La tabla Reservas contiene la información sobre las reservas que realiza un usu
 *	**Hora:** columna que nos indica la hora a la que un usuario tiene reservada la práctica. No puede contener un valor nulo.
 
 
-create table herramienta 
-(
-nombre varchar(20) not null, 
-idherramienta smallint(8) unsigned not null auto_increment,
-tipo numeric not null, 
-id smallint(8) unsigned not null auto_increment,
-iddatos smallint(8) unsigned not null auto_increment,
-idvideo smallint(8) unsigned not null auto_increment,
-primary key (id, iddatos, idvideo) 
-); 
+`create table herramienta`  
+`(`    
+`nombre varchar(20) not null,`  
+`idherramienta smallint(8) unsigned not null auto_increment,  `  
+`tipo numeric not null,   `  
+`id smallint(8) unsigned not null auto_increment,  `  
+`iddatos smallint(8) unsigned not null auto_increment,  `  
+`idvideo smallint(8) unsigned not null auto_increment,  `  
+`primary key (id, iddatos, idvideo)   `  
+`);   `  
 
-create table usuario 
-(
-num int not null, 
-pass varchar(102) not null, 
-email varchar(30) not null unique, 
-admin numeric not null, 
-id smallint(8) unsigned not null auto_increment, 
-primary key (id) 
-); 
+`create table usuario   `  
+` (  `  
+` num int not null,   `  
+` pass varchar(102) not null,  `  
+` email varchar(30) not null unique,   `  
+` admin numeric not null,   `  
+` id smallint(8) unsigned not null auto_increment,   `  
+` primary key (id)   `  
+` );   `  
 
-create table reserva 
-( 
-usuario int not null unique, 
-practica int not null, 
-hora date not null, 
-id smallint(8) unsigned not null auto_increment,
-id smallint(8) unsigned not null auto_increment,
-primary key (id), foreign key (id) references usuario(id) 
-); 
+` create table reserva   `    
+` (   `  
+` usuario int not null unique,   `  
+` practica int not null,   `  
+` hora date not null,   `  
+` id smallint(8) unsigned not null auto_increment,  `  
+` id smallint(8) unsigned not null auto_increment,  `  
+` primary key (id), `  
+` foreign key (id) references usuario(id)`  
+` );   `  
 
-create table practica 
-( 
-id smallint(8) unsigned not null auto_increment, 
-nombre varchar(20) not null, 
-iddatos smallint(8) unsigned not null auto_increment,
-idvideo smallint(8) unsigned not null auto_increment,
-usuario varchar(20) not null unique, 
-pass varchar(102) not null, 
-timeout int not null, 
-estado not null, 
-ip varchar not null, 
-id smallint(8) unsigned not null auto_increment,
-iddatos smallint(8) unsigned not null auto_increment,
-idvideo smallint(8) unsigned not null auto_increment,
-foreign key (id) references reserva(id), 
-foreign key (id, iddatos, idvideo) references herramienta(id, iddatos, idvideo)
- );
+`create table practica   `  
+` (   `  
+` id smallint(8) unsigned not null auto_increment,   `  
+` nombre varchar(20) not null,   `  
+` iddatos smallint(8) unsigned not null auto_increment,  `  
+` idvideo smallint(8) unsigned not null auto_increment,  `  
+` usuario varchar(20) not null unique,   `  
+` pass varchar(102) not null,   `  
+` timeout int not null,   `  
+` estado not null,   `  
+` ip varchar not null,   `  
+` id smallint(8) unsigned not null auto_increment,  `  
+` iddatos smallint(8) unsigned not null auto_increment,  `  
+` idvideo smallint(8) unsigned not null auto_increment,  `  
+` foreign key (id) references reserva(id),   `  
+` foreign key (id, iddatos, idvideo) references herramienta(id, iddatos, idvideo)  `  
+ ` );  `  
 
 
 Total de retos de CTF:
