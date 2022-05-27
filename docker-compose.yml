@@ -1,0 +1,87 @@
+version: '3.9'
+
+services: 
+  mysqlbase:
+   build:
+    context: .
+    dockerfile: mysql.dockerfile
+   container_name: mysql_c2
+   restart: always
+   ports:
+    - 23306:3306
+   environment:
+    MYSQL_DATABASE: 'learnlabs'
+    MYSQL_ROOT_PASSWORD: 'root'    
+    MYSQL_USER: 'usuario'
+    MYSQL_PASSWORD: 'usuario'
+    SERVICE_TAGS: testing
+    SERVICE_NAME: mysql
+   volumes:
+    - ./docker/mysql/data:/var/lib/mysql:rw
+    - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+   secrets:
+    - db_pass
+    - db_root_pass 
+   networks:
+    mysql_network:
+     aliases:
+      - mysql_host  
+
+  jslinux:
+    build:
+      context: .
+      dockerfile: jslinux.dockerfile
+    container_name: jslinux_c2
+    restart: always
+    ports:
+      - 8282:80
+    volumes:
+      - ./jslinux:/usr/share/nginx/html:rw
+    networks:
+      draft_network:
+        aliases:
+          - jslinux_host
+  
+  pythonflask:
+    build: 
+      context: .
+      dockerfile: python.dockerfile
+    container_name: pyflask_c2
+    restart: always
+    ports:
+      - 5000:5000
+    links:
+      - mysqlbase:mysql
+      - jslinux
+    volumes:
+      - type: bind
+        source: ./pyflask
+        target: /app:rw
+    depends_on:
+      - mysqlbase
+      - jslinux
+    networks:
+      draft_network:
+        aliases:
+          - pyflask_host
+
+secrets:
+  db_pass:
+    file: ./secrets/db_pass.txt
+  db_root_pass:
+    file: ./secrets/db_root_pass.txt
+      
+volumes:
+   schemas: {} 
+   database: {}
+   jslinux: {}
+   pyflask: {}
+networks:
+   mysql_network:
+     name: mysql_network
+     driver: bridge   
+   draft_network:
+     name: learnlab_net
+     driver: bridge  
+     
+ 
