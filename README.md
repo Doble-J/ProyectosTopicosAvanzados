@@ -31,7 +31,8 @@ La tabla Práctica  indica la información necesaria para la ejecución de la pr
 *	**Pass:** contraseña que utiliza el Proveedor para identificar a cada uno de los usuarios. No podrá contener valores nulos.
 *	**Timeout:** es el tiempo máximo de ejecución en el Proveedor. No puede contener un valor nulo.
 *	**Estado:** es un enumerado (cuyos valores son Libre u Ocupado) que nos indican si la herramienta está siendo usada o no. No podrá contener un valor nulo.
-*	**Ip:** contiene la ip del laboratorio desde el que se conecta la herramienta. No puede contener un valor nulo.
+*	**Ip:** contiene la ip del laboratorio desde el que se conecta la herramienta. No puede contener un valor nulo.  
+
 La tabla Reservas contiene la información sobre las reservas que realiza un usuario sobre una práctica. A continuación comentaremos las diferentes columnas:
 
 *	**id:** número que identifica cada una de las columnas de la tabla. Es la clave primaria de la tabla. Y es auto-incremental, es decir, aumenta automáticamente.
