@@ -1,7 +1,7 @@
 ﻿# ProyectosTopicosAvanzados
 Proyectos de la materia de Tópicos Avanzados
 
-Base de Datos para el laboratorio remoto:
+Base de Datos para un laboratorio remoto:
 
 ![image](https://user-images.githubusercontent.com/101353842/170783311-9375c06b-2f01-4938-b406-36935ca98f01.png)
 
@@ -39,6 +39,7 @@ La tabla Reservas contiene la información sobre las reservas que realiza un usu
 *	**Id(Práctica):** clave foránea que nos indica el id de la práctica con la que se realizará la práctica reservada. No podrá contener un valor nulo.
 *	**Hora:** columna que nos indica la hora a la que un usuario tiene reservada la práctica. No puede contener un valor nulo.
 
+Codigo para la BD:
 
 `create table herramienta`  
 `(`    
@@ -110,7 +111,6 @@ Certificado de freecodecamp:
 https://www.freecodecamp.org/Doble_J
 
 ![image](https://user-images.githubusercontent.com/101353842/170783543-9b68d361-472f-428e-8ea3-d9a6e2fb852e.png)
-
 
 
 
