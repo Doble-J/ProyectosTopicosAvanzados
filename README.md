@@ -1,7 +1,7 @@
 ﻿# ProyectosTopicosAvanzados
 Proyectos de la materia de Tópicos Avanzados
 
-Base de Datos para un laboratorio remoto:
+**Base de Datos para un laboratorio remoto:**
 
 ![image](https://user-images.githubusercontent.com/101353842/170783311-9375c06b-2f01-4938-b406-36935ca98f01.png)
 
@@ -39,7 +39,7 @@ La tabla Reservas contiene la información sobre las reservas que realiza un usu
 *	**Id(Práctica):** clave foránea que nos indica el id de la práctica con la que se realizará la práctica reservada. No podrá contener un valor nulo.
 *	**Hora:** columna que nos indica la hora a la que un usuario tiene reservada la práctica. No puede contener un valor nulo.
 
-Codigo para la BD:
+**Codigo para la BD:**
 
 `create table herramienta`  
 `(`    
@@ -90,13 +90,52 @@ Codigo para la BD:
 ` foreign key (id) references reserva(id),   `  
 ` foreign key (id, iddatos, idvideo) references herramienta(id, iddatos, idvideo)  `  
  ` );  `  
+ 
+ **Codigo para el contenedor MySQL:**
+ 
+`version: '3.9'`  
 
+`services:` #nombre del servivo a levantar  
 
-Total de retos de CTF:
+` mysqlbase:`    
+ `  build:` #levanta el servicio desde mysql.dockerfile asiganado el nombre mysql_c2    
+  `  context:`  
+   ` dockerfile: mysql.dockerfile  `    
+  ` container_name: mysql_c2  `  
+   `restart: always` #reinicio siempre que se detenga el servicio    
+   `ports:  `  
+  `  - 23306:3306` #puertos a ocupar   
+   `environment:  `   
+    `MYSQL_DATABASE: 'learnlabs' ` #nombre de la BD    
+    `MYSQL_ROOT_PASSWORD: 'root'`  #contraseña àra el usuario  
+    `MYSQL_USER: 'usuario' `  #creacion de otro usario adicional  
+    `MYSQL_PASSWORD: 'usuario' `#creacion de la contraseña para "usuario"  
+    `SERVICE_TAGS: testing`  #tag de busqueda  
+    `SERVICE_NAME: mysql`  
+   `volumes:`  
+    `- ./docker/mysql/data:/var/lib/mysql:rw` #persistencia de datos en el directorio actual en esquemas    
+    `- ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro`  
+   `networks:`  #levantamiento de la host con nombre "mysql_host"  
+    `mysql_network:`  
+    ` aliases:`  
+     ` - mysql_host`    
+
+`volumes:` #confirmacion de la persistencia de datos    
+ `  schemas: {} `  
+`networks:` #confirmacion de la red  
+ `  mysql_network:`  
+  `   name: mysql_network`  
+   `  driver: bridge `    
+ 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------------------------------------  
+**Evidencia de trabajos:**
+
+**Total de retos de CTF:**
 
 ![image](https://user-images.githubusercontent.com/101353842/170783364-3d865ded-11f3-4770-8c35-eb72d0e6882b.png)
 
-Levantamiento del contenedor SKF Flask:
+**Levantamiento del contenedor SKF Flask:**
 
 ![image](https://user-images.githubusercontent.com/101353842/170783408-9f59a6cd-c5a1-4981-882b-42c7b1043918.png)
 
@@ -106,7 +145,7 @@ Entrada al navegador:
 
 ![image](https://user-images.githubusercontent.com/101353842/170783504-69fd227a-ab4b-4a0d-90f8-b57081e373d2.png)
 
-Certificado de freecodecamp:
+**Certificado de freecodecamp:**
 
 https://www.freecodecamp.org/Doble_J
 
